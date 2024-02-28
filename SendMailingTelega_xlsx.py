@@ -1,23 +1,16 @@
 import asyncio
-
 from telethon import TelegramClient
 
 from tokens.tokens_telethon import API_ID, API_HASH
-from IDUsers.IDusers import Id_users_telega
-import openpyxl
+import openpyxl  # import
+
 
 api_id, api_hash = API_ID, API_HASH
 
 
-# client = TelegramClient('anon', api_id, api_hash, system_version='4.16.30-vxCUSTOM')
-
-async def getIdCsv():
-    pass
-
-
 async def getIdxlsx(client):
 
-    # Скрипт для открытия файла в формате .xlsx
+    # Скрипт для открытия файла в формате .xlsx (excel)
     try:
         workbook = openpyxl.load_workbook('FilesWithUsers\\telegaUsers.xlsx')
         sheet = workbook.active
@@ -26,13 +19,16 @@ async def getIdxlsx(client):
 
             # Можно отправить сообщение по телефону - "+79999999999" (В кавычках)
             await client.send_message(row[0], "Hi!")
+            print(f"Отправленно пользователю - {row[0]}")
             await asyncio.sleep(3)
 
     except FileNotFoundError:
         print("Не удалось открыть файл")
 
+    await client
 
 async def main():
+
     try:
         async with TelegramClient('anon', api_id, api_hash, system_version='4.16.30-vxCUSTOM') as client:
 
@@ -40,10 +36,8 @@ async def main():
 
             await getIdxlsx(client)
 
-            await client.run_until_disconnected()
-
     except:
-        KeyboardInterrupt
+        print("Что-то пошло не так")
 
 
 if __name__ == "__main__":
