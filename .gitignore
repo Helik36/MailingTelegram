@@ -1,0 +1,5 @@
+# private tokens and session
+tokens_tele_bot.py
+tokens_telethon.py
+*.session
+FilesWithUsers
